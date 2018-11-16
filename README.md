@@ -6,19 +6,19 @@
 
 在线demo：
 
-[一次性缓存完](https://itguliang.github.io/video-download-disabled/bufferAll.html)
+[缓存完再播放](https://itguliang.github.io/video-download-disabled/playAfterBuffered.html)
 
-[边播放边缓存](https://itguliang.github.io/video-download-disabled/bufferWhenNeeded.html)
+[边播放边缓存](https://itguliang.github.io/video-download-disabled/playWhenBuffering.html)
 
 ### Video 禁止鼠标右键下载
 ```html
 <!-- 添加 oncontextmenu="return false" -->
- <video src="地址" controls preload="auto" oncontextmenu="return false"></video>
+<video src="地址" controls preload="auto" oncontextmenu="return false"></video>
 ```
 
 ### 禁止源码打开链接下载
 
-主要使用 MediaSource 和 createObjectURL 实现
+主要使用 [MediaSource](https://developer.mozilla.org/zh-CN/docs/Web/API/MediaSource) 和 [createObjectURL](https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL) 实现
 
 html:
 ```html

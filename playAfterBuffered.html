@@ -6,18 +6,16 @@
 </head>
 
 <body>
-  <div style="width: 70%;margin: 0 auto;">
+  <div style="width: 70%;margin: 0 auto;text-align: center;">
     <video controls style="width: 100%;"></video>
+    <div style="margin:20px 0;">
+      视频加载完再播放demo<br>
+      <a href="playAfterBuffered.html?type=mp4-ok">可播放的mp4视频</a> 、
+      <a href="playAfterBuffered.html?type=mp4-err">不可播放的mp4视频</a> 、
+      <a href="playAfterBuffered.html?type=webm"> 可播放的webm格式视频</a>
+    </div>
     <div>
-      下载源码后可更改不同文件来测试效果<br><br>
-
-      同样是mp4格式文件，不能播放，说明跟文件也有关系<br>
-      var assetURL = 'demo-err.mp4';<br>
-      var mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';<br><br>
-
-      webm格式视频<br>
-      var assetURL = 'demo.webm';<br>
-      var mimeCodec = 'video/webm;codecs="vorbis,vp8"';
+        <a href="playWhenBuffering?type=mp4-ok">视频边播放边加载demo</a>
     </div>
   </div>
   <script>
@@ -26,15 +24,15 @@
     var assetURL = 'demo-ok.mp4';
     var mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
 
-    if(getQueryString("type")=="mp4-ok"){
-        assetURL = 'demo-ok.mp4';
-        mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
-    }else if(getQueryString("type")=="mp4-err"){
-        assetURL = 'demo-err.mp4';
-        mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
-    }else if(getQueryString("type")=="webm"){
-        assetURL = 'demo.webm';
-        mimeCodec = 'video/webm;codecs="vorbis,vp8"';
+    if (getQueryString("type") == "mp4-ok") {
+      assetURL = 'demo-ok.mp4';
+      mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
+    } else if (getQueryString("type") == "mp4-err") {
+      assetURL = 'demo-err.mp4';
+      mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
+    } else if (getQueryString("type") == "webm") {
+      assetURL = 'demo.webm';
+      mimeCodec = 'video/webm;codecs="vorbis,vp8"';
     }
 
     if ('MediaSource' in window && MediaSource.isTypeSupported(mimeCodec)) {
@@ -61,7 +59,7 @@
     };
 
     function fetchAB(url, cb) {
-      console.log(url);
+      console.log("当前播放文件：" + url);
       var xhr = new XMLHttpRequest;
       xhr.open('get', url);
       xhr.responseType = 'arraybuffer';
@@ -75,7 +73,7 @@
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
       var r = window.location.search.substr(1).match(reg);
       if (r != null) return unescape(r[2]); return null;
-    }
+    };
 
   </script>
 </body>
