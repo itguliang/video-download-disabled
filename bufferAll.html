@@ -26,17 +26,17 @@
     var assetURL = 'demo-ok.mp4';
     var mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
 
-    if(getQueryString(type)=="mp4-ok"){
+    if(getQueryString("type")=="mp4-ok"){
         assetURL = 'demo-ok.mp4';
         mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
-    }else if(getQueryString(type)=="mp4-err"){
+    }else if(getQueryString("type")=="mp4-err"){
         assetURL = 'demo-err.mp4';
         mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
-    }else if(getQueryString(type)=="webm"){
+    }else if(getQueryString("type")=="webm"){
         assetURL = 'demo.webm';
         mimeCodec = 'video/webm;codecs="vorbis,vp8"';
     }
-    
+
     if ('MediaSource' in window && MediaSource.isTypeSupported(mimeCodec)) {
       var mediaSource = new MediaSource;
       //console.log(mediaSource.readyState); // closed
