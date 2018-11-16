@@ -1,66 +1,63 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8"/>
+  </head>
+  <body>
+    <video controls></video>
+    下载源码后可更改不同文件测试效果
+    // var assetURL = 'demo-err.mp4';
+    // var mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
 
-<head>
-  <meta charset="utf-8" />
-</head>
+    // var assetURL = 'demo.webm';
+    // var mimeCodec = 'video/webm;codecs="vorbis,vp8"';
+    <script>
+      var video = document.querySelector('video');
 
-<body>
-  <div>可加载播放的mp4文件</div>
-  <video id="mp4DemoOk" controls></video>
-  <div>不可加载播放的mp4文件</div>
-  <video id="mp4DemoErr" controls></video>
-  <div>可加载播放的webm文件</div>
-  <video id="webmDemo" controls></video>
-  <script>
+      var assetURL = 'demo-ok.mp4';
+      var mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
+      
+      // var assetURL = 'demo-err.mp4';
+      // var mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
 
-    initVideo("mp4DemoOk","demo-ok.mp4",'video/mp4; codecs="avc1.42E01E, mp4a.40.2"');
-    initVideo("mp4DemoErr","demo-err.mp4",'video/mp4; codecs="avc1.42E01E, mp4a.40.2"');
-    initVideo("webmDemo","demo.webm",'video/webm;codecs = "vp8,vorbis"');
-
-    function initVideo(id, url,mineType) {
-      var video = document.getElementById(id);
-      var assetURL = url;
-      // Need to be specific for Blink regarding codecs
-      // ./mp4info frag_bunny.mp4 | grep Codec
-      var mimeCodec = mineType;
+      // var assetURL = 'demo.webm';
+      // var mimeCodec = 'video/webm;codecs="vorbis,vp8"';
+      
 
       if ('MediaSource' in window && MediaSource.isTypeSupported(mimeCodec)) {
         var mediaSource = new MediaSource;
         //console.log(mediaSource.readyState); // closed
         video.src = URL.createObjectURL(mediaSource);
-        mediaSource.addEventListener('sourceopen', sourceOpen(mimeCodec));
+        mediaSource.addEventListener('sourceopen', sourceOpen);
       } else {
         console.error('Unsupported MIME type or codec: ', mimeCodec);
       }
-    }
 
-
-    function sourceOpen(mimeCodec) {
-      //console.log(this.readyState); // open
-      var mediaSource = this;
-      var sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
-      fetchAB(assetURL, function (buf) {
-        sourceBuffer.addEventListener('updateend', function (_) {
-          mediaSource.endOfStream();
-          //video.play();
-          //console.log(mediaSource.readyState); // ended
+      function sourceOpen (_) {
+        //console.log(this.readyState); // open
+        var mediaSource = this;
+        var sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
+        fetchAB(assetURL, function (buf) {
+          sourceBuffer.addEventListener('updateend', function (_) {
+            mediaSource.endOfStream();
+            video.play();
+            //console.log(mediaSource.readyState); // ended
+          });
+          sourceBuffer.appendBuffer(buf);
         });
-        sourceBuffer.appendBuffer(buf);
-      });
-    };
-
-    function fetchAB(url, cb) {
-      console.log(url);
-      var xhr = new XMLHttpRequest;
-      xhr.open('get', url);
-      xhr.responseType = 'arraybuffer';
-      xhr.onload = function () {
-        cb(xhr.response);
       };
-      xhr.send();
-    };
-  </script>
-</body>
 
+      function fetchAB (url, cb) {
+        console.log(url);
+        var xhr = new XMLHttpRequest;
+        xhr.open('get', url);
+        xhr.responseType = 'arraybuffer';
+        xhr.onload = function () {
+          cb(xhr.response);
+        };
+        xhr.send();
+      };
+    </script>
+  </body>
 </html>
+
