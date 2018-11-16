@@ -29,14 +29,14 @@
         var mediaSource = new MediaSource;
         //console.log(mediaSource.readyState); // closed
         video.src = URL.createObjectURL(mediaSource);
-        mediaSource.addEventListener('sourceopen', sourceOpen);
+        mediaSource.addEventListener('sourceopen', sourceOpen(mimeCodec));
       } else {
         console.error('Unsupported MIME type or codec: ', mimeCodec);
       }
     }
 
 
-    function sourceOpen(_) {
+    function sourceOpen(mimeCodec) {
       //console.log(this.readyState); // open
       var mediaSource = this;
       var sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
