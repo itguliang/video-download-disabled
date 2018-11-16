@@ -23,7 +23,7 @@
       var assetURL = url;
       // Need to be specific for Blink regarding codecs
       // ./mp4info frag_bunny.mp4 | grep Codec
-      var mimeCodec = mimeCodec;
+      var mimeCodec = mineType;
 
       if ('MediaSource' in window && MediaSource.isTypeSupported(mimeCodec)) {
         var mediaSource = new MediaSource;
