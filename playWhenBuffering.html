@@ -142,6 +142,7 @@
     };
 
     var videoPausedStatus;
+    var pageFocus=true;
     document.addEventListener('visibilitychange', function () {
       var isHidden = document.hidden;
       if (isHidden) {
@@ -156,6 +157,22 @@
         }
       }
     });
+    
+    setTimeout(function(){
+      if(document.hasFocus()!=pageFocus){
+        pageFocus=document.hasFocus();
+        if(!pageFocus){
+          if (!video.paused) {
+            videoPausedStatus = false;
+            video.pause();
+          }
+        }else{
+          if (!videoPausedStatus) {
+            video.play();
+          }
+        }
+      }
+    }, 1000);
   </script>
 </body>
 
