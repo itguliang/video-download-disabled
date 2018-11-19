@@ -142,7 +142,7 @@
     };
 
     var videoPausedStatus;
-    var pageFocus=true;
+    var pageFocus = true;
     document.addEventListener('visibilitychange', function () {
       var isHidden = document.hidden;
       if (isHidden) {
@@ -158,15 +158,15 @@
       }
     });
 
-    setInterval(function(){
-      if(document.hasFocus()!=pageFocus){
-        pageFocus=document.hasFocus();
-        if(!pageFocus){
+    setInterval(function () {
+      if (document.hasFocus() != pageFocus) {
+        pageFocus = document.hasFocus();
+        if (!pageFocus) {
           if (!video.paused) {
             videoPausedStatus = false;
             video.pause();
           }
-        }else{
+        } else {
           if (!videoPausedStatus) {
             video.play();
           }
