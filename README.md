@@ -13,7 +13,7 @@
 ### Video 禁止鼠标右键下载
 ```html
 <!-- 添加 oncontextmenu="return false" -->
-<video src="地址" controls preload="auto" oncontextmenu="return false"></video>
+<video id="videoDemo" controls preload="auto" oncontextmenu="return false"></video>
 ```
 
 ### 禁止源码打开链接下载
@@ -22,7 +22,7 @@
 
 html:
 ```html
-<video id="videoDemo" width="400"  height="200" controls preload="auto" oncontextmenu="return false" ></video>
+<video id="videoDemo" controls preload="auto" oncontextmenu="return false" ></video>
 ```
 js:
 ```javascript

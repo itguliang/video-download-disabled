@@ -7,7 +7,7 @@
 
 <body>
   <div style="width: 70%;margin: 0 auto;text-align: center;">
-    <video controls style="width: 100%;"></video>
+    <video controls style="width: 100%;" oncontextmenu="return false"></video>
     <div style="margin:20px 0;">
       视频加载完再播放demo<br>
       <a href="playAfterBuffered.html?type=mp4-ok">可播放的mp4视频</a> 、
@@ -15,7 +15,7 @@
       <a href="playAfterBuffered.html?type=webm"> 可播放的webm格式视频</a>
     </div>
     <div>
-        <a href="playWhenBuffering?type=mp4-ok">视频边播放边加载demo</a>
+      <a href="playWhenBuffering?type=mp4-ok">视频边播放边加载demo</a>
     </div>
   </div>
   <script>
@@ -74,6 +74,15 @@
       var r = window.location.search.substr(1).match(reg);
       if (r != null) return unescape(r[2]); return null;
     };
+
+    document.addEventListener('visibilitychange', function () {
+      var isHidden = document.hidden;
+      if (isHidden) {
+        document.title = '当焦点不在当前窗口时的网页标题';
+      } else {
+        document.title = '再变回来或者做点其他的';
+      }
+    });
 
   </script>
 </body>
