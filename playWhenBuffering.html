@@ -140,6 +140,22 @@
       var r = window.location.search.substr(1).match(reg);
       if (r != null) return unescape(r[2]); return null;
     };
+
+    var videoPausedStatus;
+    document.addEventListener('visibilitychange', function () {
+      var isHidden = document.hidden;
+      if (isHidden) {
+        videoPausedStatus = true;
+        if (!video.paused) {
+          videoPausedStatus = false;
+          video.pause();
+        }
+      } else {
+        if (!videoPausedStatus) {
+          video.play();
+        }
+      }
+    });
   </script>
 </body>
 
