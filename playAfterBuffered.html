@@ -76,6 +76,7 @@
     };
 
     var videoPausedStatus;
+    var pageFocus = true;
     document.addEventListener('visibilitychange', function () {
       var isHidden = document.hidden;
       if (isHidden) {
@@ -105,7 +106,7 @@
           }
         }
       }
-    }, 1000);
+    }, 500);
 
   </script>
 </body>
