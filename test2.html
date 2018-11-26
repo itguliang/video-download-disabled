@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+</head>
+
+<body>
+  <div style="width: 70%;margin: 0 auto;text-align: center;">
+    <video controls style="width: 100%;" oncontextmenu="return false">
+      <source src="movie.mp4"  type="video/mp4">
+      <source src="movie.ogg"  type="video/ogg">
+      您的浏览器不支持 HTML5 video 标签。
+    </video>
+  </div>
+  <script>
+    var video = document.querySelector('video');
+    
+    var videoPausedStatus;
+    var pageFocus = true;
+    document.addEventListener('visibilitychange', function () {
+      var isHidden = document.hidden;
+      if (isHidden) {
+        videoPausedStatus = true;
+        if (!video.paused) {
+          videoPausedStatus = false;
+          video.pause();
+        }
+      } else {
+        if (!videoPausedStatus) {
+          video.play();
+        }
+      }
+    });
+
+    setInterval(function () {
+      if (document.hasFocus() != pageFocus) {
+        pageFocus = document.hasFocus();
+        if (!pageFocus) {
+          if (!video.paused) {
+            videoPausedStatus = false;
+            video.pause();
+          }
+        } else {
+          if (!videoPausedStatus) {
+            video.play();
+          }
+        }
+      }
+    }, 500);
+
+  </script>
+</body>
+
+</html>
