@@ -7,11 +7,17 @@
 
 <body>
   <div style="width: 70%;margin: 0 auto;text-align: center;">
+  mp4格式:
     <video controls style="width: 100%;" oncontextmenu="return false">
       <source src="movie.mp4"  type="video/mp4">
+      您的浏览器不支持 HTML5 video 标签。
+    </video>
+  ogg格式:
+    <video controls style="width: 100%;" oncontextmenu="return false">
       <source src="movie.ogg"  type="video/ogg">
       您的浏览器不支持 HTML5 video 标签。
     </video>
+
   </div>
   <script>
     var video = document.querySelector('video');
