@@ -20,8 +20,8 @@
 
 ### 禁止源码打开链接下载
 
-主要使用 [MediaSource](https://developer.mozilla.org/zh-CN/docs/Web/API/MediaSource) 和 [createObjectURL](https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL) 实现
-参考源码：https://github.com/nickdesaulniers/netfix/tree/gh-pages/demo
+主要使用 [MediaSource](https://developer.mozilla.org/zh-CN/docs/Web/API/MediaSource) 和 [createObjectURL](https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL) 实现。
+[参考源码](https://github.com/nickdesaulniers/netfix/tree/gh-pages/demo)
 
 html:
 ```html
