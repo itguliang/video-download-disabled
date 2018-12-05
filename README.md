@@ -1,17 +1,16 @@
 # video-download-disabled
 
-### 效果
+### 实现效果
 
 - 实现视频可播放不能下载，禁止右键下载、F12源码打开链接下载
 - 实现只在当前窗口播放，切换窗口、窗口最小化、窗口被遮挡停止播放，恢复后继续播放
 
-[查看源码](https://github.com/itguliang/video-download-disabled)
+在线demo：[缓存完再播放](https://itguliang.github.io/video-download-disabled/playAfterBuffered.html) 、 [边播放边缓存](https://itguliang.github.io/video-download-disabled/playWhenBuffering.html) 、 [IE 测试防止播放作弊](https://itguliang.github.io/video-download-disabled/test.html)
 
-在线demo：
+兼容情况：
 
-[缓存完再播放](https://itguliang.github.io/video-download-disabled/playAfterBuffered.html)
-
-[边播放边缓存](https://itguliang.github.io/video-download-disabled/playWhenBuffering.html)
+![avatar](http://img.itguliang.com/static/images/1e5c2008-1.png)
+![avatar](http://img.itguliang.com/static/images/1e5c2008-2.png)
 
 ### Video 禁止鼠标右键下载
 ```html
@@ -22,6 +21,7 @@
 ### 禁止源码打开链接下载
 
 主要使用 [MediaSource](https://developer.mozilla.org/zh-CN/docs/Web/API/MediaSource) 和 [createObjectURL](https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL) 实现
+参考源码：https://github.com/nickdesaulniers/netfix/tree/gh-pages/demo
 
 html:
 ```html
@@ -80,9 +80,11 @@ var video = document.getElementById("videoDemo");
     }
 ```
 
-待解决: 发现network还是可以看到视频链接的并且右键还是可以打开并且下载
+不兼容：IE（提示 Unsupported MIME type or codec:  video/mp4; codecs="avc1.42E01E, mp4a.40.2"）
 
-###  `document.visibilityState` 监听浏览器最小化
+待解决: 发现network还是可以看到视频链接的并且右键还是可以打开并且下载（Safari可以）
+
+###  监听浏览器最小化 - document.visibilityState
 
 `document.hidden`：表示页面是否隐藏的布尔值。页面隐藏包括 页面在后台标签页中 或者 浏览器最小化 （注意，页面被其他软件遮盖并不算隐藏，比如打开的 sublime 遮住了浏览器）。
 
@@ -126,7 +128,7 @@ document.addEventListener('visibilitychange', function () {
 // });
 ```
 
-### `document.hasFocus()` 判断当前页面是否被激活
+### 判断当前页面是否被激活 - document.hasFocus()
 解决不能监听页面被其他软件遮盖
 ```javascript
 setInterval(function () {
